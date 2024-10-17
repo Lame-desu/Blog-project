@@ -1,6 +1,5 @@
 #custome 
 .prettierignore
-*.json
 # Logs
 logs
 *.log
