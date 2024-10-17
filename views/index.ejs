@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="container pb-5 mb-5">
+      <div class="home-page mt-5">
+        <button class="btn btn-primary mx-3">HOME</button>
+        <form action="/creat" method="get">
+          <input class="btn btn-info" type="submit" value="create blog" />
+        </form>
+      </div>
+      <div class="title">
+        <div class="h1-title">
+          <h1>BLOGS</h1>
+        </div>
+        <div class="about">
+          <h2>create and share your thoughts</h2>
+          <p>
+            This platform is designed for everyone to express and share their
+            thoughts on various topics. Feel free to write and share what you
+            believe can make a positive impact on others!
+          </p>
+        </div>
+        <div class="owner">
+          <h3>by Lamesgin</h3>
+        </div>
+      </div>
+      <hr />
+      <div class="container">
+        <% if(locals.blogs_array) { %>
+        <div class="my-5">
+          <h2>Blog Topics</h2>
+          <p>Edit or read Blogs</p>
+        </div>
+        <%for(var i in blogs_array){ %>
+        <div class="blogs my-5">
+          <div class="edit-content"></div>
+          <div class="row">
+            <h4 class="col-9"><%= blogs_array[i].header%></h4>
+            <button class="col-1 me-2 btn btn-primary read-body">Read</button>
+            <button class="edit col-1 me-2 btn btn-info">Edit</button>
+            <form class="row col-1" action="/delete" method="post">
+              <input
+                class="deleteInputHidden"
+                type="text"
+                name="index"
+                value=" <%= i %> "
+              />
+              <input class="btn btn-danger" type="submit" value="Delete" />
+            </form>
+            <hr />
+            <% for(var j = 0; j < blogs_array[i].content.length; j++){%>
+            <p class="col-12 hide-content"><%= blogs_array[i].content[j] %></p>
+            <% } %>
+          </div>
+        </div>
+        <% } }%>
+        <h3 class="mb-3">Creat Blog</h3>
+        <form action="/creat" method="get">
+          <input class="btn btn-primary" type="submit" value="create blog" />
+        </form>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="dom.js"></script>
+  </body>
+</html>
